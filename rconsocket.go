@@ -53,9 +53,7 @@ func (s *rconSocket) receive() (_ []byte, err error) {
 			"bytes": total,
 		}).Debug("steam: reading")
 		b := make([]byte, total)
-		if err := s.conn.SetReadDeadline(time.Now().Add(400 * time.Millisecond)); err != nil {
-			return nil, err
-		}
+
 		n, err := s.conn.Read(b)
 		if n > 0 {
 			log.WithFields(logrus.Fields{
